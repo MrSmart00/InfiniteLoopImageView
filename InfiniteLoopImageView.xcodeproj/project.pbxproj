@@ -10,6 +10,12 @@
 		C596207B20B4465000CFEED4 /* InfiniteLoopImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C596207120B4465000CFEED4 /* InfiniteLoopImageView.framework */; };
 		C596208020B4465000CFEED4 /* InfiniteLoopImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596207F20B4465000CFEED4 /* InfiniteLoopImageViewTests.swift */; };
 		C596208220B4465000CFEED4 /* InfiniteLoopImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = C596207420B4465000CFEED4 /* InfiniteLoopImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C596209020B4467200CFEED4 /* Base.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208C20B4467200CFEED4 /* Base.extension.swift */; };
+		C596209120B4467200CFEED4 /* String.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208D20B4467200CFEED4 /* String.extension.swift */; };
+		C596209220B4467200CFEED4 /* UIView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208E20B4467200CFEED4 /* UIView.extension.swift */; };
+		C596209320B4467200CFEED4 /* UIViewController.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208F20B4467200CFEED4 /* UIViewController.extension.swift */; };
+		C596209620B4468900CFEED4 /* InfiniteLoopImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596209420B4468900CFEED4 /* InfiniteLoopImageView.swift */; };
+		C596209720B4468900CFEED4 /* InfiniteLoopImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596209520B4468900CFEED4 /* InfiniteLoopImageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +35,12 @@
 		C596207A20B4465000CFEED4 /* InfiniteLoopImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfiniteLoopImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C596207F20B4465000CFEED4 /* InfiniteLoopImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteLoopImageViewTests.swift; sourceTree = "<group>"; };
 		C596208120B4465000CFEED4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C596208C20B4467200CFEED4 /* Base.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.extension.swift; sourceTree = "<group>"; };
+		C596208D20B4467200CFEED4 /* String.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.extension.swift; sourceTree = "<group>"; };
+		C596208E20B4467200CFEED4 /* UIView.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.extension.swift; sourceTree = "<group>"; };
+		C596208F20B4467200CFEED4 /* UIViewController.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.extension.swift; sourceTree = "<group>"; };
+		C596209420B4468900CFEED4 /* InfiniteLoopImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteLoopImageView.swift; sourceTree = "<group>"; };
+		C596209520B4468900CFEED4 /* InfiniteLoopImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteLoopImageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +83,9 @@
 		C596207320B4465000CFEED4 /* InfiniteLoopImageView */ = {
 			isa = PBXGroup;
 			children = (
+				C596209420B4468900CFEED4 /* InfiniteLoopImageView.swift */,
+				C596209520B4468900CFEED4 /* InfiniteLoopImageViewModel.swift */,
+				C596208B20B4467200CFEED4 /* Extensions */,
 				C596207420B4465000CFEED4 /* InfiniteLoopImageView.h */,
 				C596207520B4465000CFEED4 /* Info.plist */,
 			);
@@ -84,6 +99,17 @@
 				C596208120B4465000CFEED4 /* Info.plist */,
 			);
 			path = InfiniteLoopImageViewTests;
+			sourceTree = "<group>";
+		};
+		C596208B20B4467200CFEED4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C596208C20B4467200CFEED4 /* Base.extension.swift */,
+				C596208D20B4467200CFEED4 /* String.extension.swift */,
+				C596208E20B4467200CFEED4 /* UIView.extension.swift */,
+				C596208F20B4467200CFEED4 /* UIViewController.extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +222,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C596209720B4468900CFEED4 /* InfiniteLoopImageViewModel.swift in Sources */,
+				C596209220B4467200CFEED4 /* UIView.extension.swift in Sources */,
+				C596209020B4467200CFEED4 /* Base.extension.swift in Sources */,
+				C596209320B4467200CFEED4 /* UIViewController.extension.swift in Sources */,
+				C596209120B4467200CFEED4 /* String.extension.swift in Sources */,
+				C596209620B4468900CFEED4 /* InfiniteLoopImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +375,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = InfiniteLoopImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.hiroya.hinomori.InfiniteLoopImageView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -364,6 +397,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = InfiniteLoopImageView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.hiroya.hinomori.InfiniteLoopImageView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -376,6 +410,7 @@
 		C596208920B4465000CFEED4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DHY6ZSRL6G;
 				INFOPLIST_FILE = InfiniteLoopImageViewTests/Info.plist;
@@ -390,6 +425,7 @@
 		C596208A20B4465000CFEED4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DHY6ZSRL6G;
 				INFOPLIST_FILE = InfiniteLoopImageViewTests/Info.plist;
