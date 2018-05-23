@@ -48,5 +48,27 @@ extension ILExtension where Base == UIViewController {
         }
         return self.findVisibleViewController(viewController: rootVC)
     }
+    
+    func isVisible() -> Bool {
+        var visible = false
+        if let parentVC = base.view.il.parentViewController() {
+            if let currentVC = UIViewController.il.currentTopViewController() {
+                if currentVC.isEqual(parentVC) {
+                    visible = true
+                } else {
+                    currentVC.childViewControllers.forEach({ (childVC) in
+                        if childVC.isEqual(parentVC) {
+                            let point = childVC.view.convert(childVC.view.frame.origin, to: currentVC.view)
+                            if point.x == 0 {
+                                visible = true
+                                return
+                            }
+                        }
+                    })
+                }
+            }
+        }
+        return visible
+    }
 }
 

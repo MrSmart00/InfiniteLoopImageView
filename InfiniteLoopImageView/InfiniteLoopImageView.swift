@@ -52,16 +52,16 @@ private class ImageCell: UICollectionViewCell {
 }
 
 class InfiniteLoopImageView: UIView {
-
+    
     private var timer: Timer? = nil
     private var collection: UICollectionView?
+    private var needsCentering = false
     
     private let viewModel: InfiniteLoopImageViewModel = InfiniteLoopImageViewModel()
     
     var rotationInterval: TimeInterval = 5
     weak var delegate: InfiniteLoopImageDelegate?
     private var indexChangeObserver: NSKeyValueObservation?
-
     init(_ frame: CGRect, layout: UICollectionViewFlowLayout) {
         super.init(frame: frame)
         setup(frame, layout)
@@ -76,6 +76,11 @@ class InfiniteLoopImageView: UIView {
         viewModel.bind(self)
         collection = UICollectionView(frame: frame, collectionViewLayout: layout)
         if let collectionView = collection {
+            if collectionView.frame.size.width != layout.itemSize.width {
+                needsCentering = true
+            } else {
+                collectionView.isPagingEnabled = true
+            }
             collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
             collectionView.backgroundColor = .clear
             collectionView.delegate = self
@@ -83,7 +88,6 @@ class InfiniteLoopImageView: UIView {
             collectionView.scrollsToTop = false
             collectionView.showsVerticalScrollIndicator = false
             collectionView.showsHorizontalScrollIndicator = false
-            collectionView.isPagingEnabled = true
             addSubview(collectionView)
             
             collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,7 +99,7 @@ class InfiniteLoopImageView: UIView {
             addConstraints(viewConstraints)
         }
     }
-
+    
     private func startAutoRotation() {
         if isUserInteractionEnabled && !isHidden && timer == nil {
             timer = Timer.scheduledTimer(timeInterval: rotationInterval,
@@ -118,36 +122,15 @@ class InfiniteLoopImageView: UIView {
             return
         }
         
-        if !isVisible() {
-            stopAutoRotation()
-            return
-        }
-        
-        collection?.scrollToItem(at: IndexPath(row: viewModel.currentIndex + 1, section: 0),
-                                 at: .centeredHorizontally,
-                                 animated: true)
-    }
-    
-    private func isVisible() -> Bool {
-        var visible = false
-        if let parentVC = (self as UIView).il.parentViewController() {
-            if let currentVC = UIViewController.il.currentTopViewController() {
-                if currentVC.isEqual(parentVC) {
-                    visible = true
-                } else {
-                    currentVC.childViewControllers.forEach({ (childVC) in
-                        if childVC.isEqual(parentVC) {
-                            let point = childVC.view.convert(childVC.view.frame.origin, to: currentVC.view)
-                            if point.x == 0 {
-                                visible = true
-                                return
-                            }
-                        }
-                    })
-                }
+        if let vc = (self as UIView).il.parentViewController() {
+            if vc.il.isVisible() {
+                collection?.scrollToItem(at: IndexPath(row: viewModel.currentIndex + 1, section: 0),
+                                         at: .centeredHorizontally,
+                                         animated: true)
+                return
             }
         }
-        return visible
+        stopAutoRotation()
     }
 }
 
@@ -168,7 +151,7 @@ extension InfiniteLoopImageView: UICollectionViewDelegate {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
+        if !decelerate, !needsCentering {
             endScroll(scrollView, update: false)
         }
     }
@@ -179,6 +162,33 @@ extension InfiniteLoopImageView: UICollectionViewDelegate {
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         endScroll(scrollView, update: false)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if needsCentering {
+            let layout = collection!.collectionViewLayout as! UICollectionViewFlowLayout
+            let pageWidth = layout.itemSize.width
+            let currentOffset = scrollView.contentOffset.x
+            var newTargetOffset: CGFloat
+            let diff = (scrollView.frame.size.width - layout.itemSize.width) / 2
+            
+            let current: CGFloat
+            if targetContentOffset.pointee.x > currentOffset {
+                current = ceil(currentOffset / pageWidth)
+            } else {
+                current = floor(currentOffset / pageWidth)
+            }
+            newTargetOffset = current * pageWidth - diff
+            
+            if newTargetOffset < 0 {
+                newTargetOffset = 0
+            } else if (newTargetOffset > scrollView.contentSize.width){
+                newTargetOffset = scrollView.contentSize.width
+            }
+            
+            targetContentOffset.pointee.x = CGFloat(currentOffset)
+            scrollView.setContentOffset(CGPoint(x: CGFloat(newTargetOffset), y: scrollView.contentOffset.y), animated: true)
+        }
     }
     
     private func endScroll(_ scrollView: UIScrollView, update: Bool) {
@@ -217,6 +227,7 @@ extension InfiniteLoopImageView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
         let index = viewModel.convertIndex(indexPath.row)
         let url = viewModel.imageURLList[index]
+        cell.image = nil
         viewModel.getBannerImage(url: url) { (loadedURL, image) in
             if url == loadedURL {
                 cell.image = image
