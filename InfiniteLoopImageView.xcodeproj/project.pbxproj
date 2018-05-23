@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C511608D20B4FC7600FE964B /* InfiniteLoopImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596209520B4468900CFEED4 /* InfiniteLoopImageViewModel.swift */; };
+		C511608E20B508B500FE964B /* Base.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208C20B4467200CFEED4 /* Base.extension.swift */; };
+		C511608F20B508B500FE964B /* String.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208D20B4467200CFEED4 /* String.extension.swift */; };
+		C511609020B508B500FE964B /* UIView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208E20B4467200CFEED4 /* UIView.extension.swift */; };
+		C511609120B508B500FE964B /* UIViewController.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208F20B4467200CFEED4 /* UIViewController.extension.swift */; };
 		C596207B20B4465000CFEED4 /* InfiniteLoopImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C596207120B4465000CFEED4 /* InfiniteLoopImageView.framework */; };
 		C596208020B4465000CFEED4 /* InfiniteLoopImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596207F20B4465000CFEED4 /* InfiniteLoopImageViewTests.swift */; };
 		C596208220B4465000CFEED4 /* InfiniteLoopImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = C596207420B4465000CFEED4 /* InfiniteLoopImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -235,7 +240,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C511609120B508B500FE964B /* UIViewController.extension.swift in Sources */,
+				C511608D20B4FC7600FE964B /* InfiniteLoopImageViewModel.swift in Sources */,
+				C511608E20B508B500FE964B /* Base.extension.swift in Sources */,
 				C596208020B4465000CFEED4 /* InfiniteLoopImageViewTests.swift in Sources */,
+				C511608F20B508B500FE964B /* String.extension.swift in Sources */,
+				C511609020B508B500FE964B /* UIView.extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

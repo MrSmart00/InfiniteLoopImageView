@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Hinomori Hiroya. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIViewController : ILExtensionCompatible { }
 
