@@ -12,6 +12,7 @@
 		C511608F20B508B500FE964B /* String.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208D20B4467200CFEED4 /* String.extension.swift */; };
 		C511609020B508B500FE964B /* UIView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208E20B4467200CFEED4 /* UIView.extension.swift */; };
 		C511609120B508B500FE964B /* UIViewController.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596208F20B4467200CFEED4 /* UIViewController.extension.swift */; };
+		C511609320B512B400FE964B /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = C511609220B512B400FE964B /* .travis.yml */; };
 		C596207B20B4465000CFEED4 /* InfiniteLoopImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C596207120B4465000CFEED4 /* InfiniteLoopImageView.framework */; };
 		C596208020B4465000CFEED4 /* InfiniteLoopImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C596207F20B4465000CFEED4 /* InfiniteLoopImageViewTests.swift */; };
 		C596208220B4465000CFEED4 /* InfiniteLoopImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = C596207420B4465000CFEED4 /* InfiniteLoopImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C511609220B512B400FE964B /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
 		C596207120B4465000CFEED4 /* InfiniteLoopImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InfiniteLoopImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C596207420B4465000CFEED4 /* InfiniteLoopImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteLoopImageView.h; sourceTree = "<group>"; };
 		C596207520B4465000CFEED4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		C596206720B4465000CFEED4 = {
 			isa = PBXGroup;
 			children = (
+				C511609220B512B400FE964B /* .travis.yml */,
 				C596207320B4465000CFEED4 /* InfiniteLoopImageView */,
 				C596207E20B4465000CFEED4 /* InfiniteLoopImageViewTests */,
 				C596207220B4465000CFEED4 /* Products */,
@@ -210,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C511609320B512B400FE964B /* .travis.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
