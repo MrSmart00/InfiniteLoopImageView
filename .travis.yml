@@ -1,4 +1,4 @@
 language: objective-c
 osx_image: xcode9.3
 script:
-    -xcodebuild -scheme InfiniteLoopImageViewTests -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=11.2,name=iPhone 7' -configuration Debug test | xcpretty -c
+    -xcodebuild -scheme InfiniteLoopImageViewTests -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=11.3,name=iPhone 7' -configuration Debug test | xcpretty -c
