@@ -215,6 +215,12 @@ extension InfiniteLoopImageView: UICollectionViewDelegate {
         startAutoRotation()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let dl = delegate {
+            let index = IndexPath(row: viewModel.convertIndex(indexPath.row), section: indexPath.section)
+            dl.rotationBanner(self, tappedIndexPath: index)
+        }
+    }
 }
 
 extension InfiniteLoopImageView: UICollectionViewDataSource {
