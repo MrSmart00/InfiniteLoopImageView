@@ -57,7 +57,7 @@ class InfiniteLoopImageView: UIView {
     private var collection: UICollectionView?
     private var needsCentering = false
     
-    private let viewModel: InfiniteLoopImageViewModel = InfiniteLoopImageViewModel()
+    let viewModel: InfiniteLoopImageViewModel = InfiniteLoopImageViewModel()
     
     var rotationInterval: TimeInterval = 5
     weak var delegate: InfiniteLoopImageDelegate?
@@ -76,11 +76,7 @@ class InfiniteLoopImageView: UIView {
         viewModel.bind(self)
         collection = UICollectionView(frame: frame, collectionViewLayout: layout)
         if let collectionView = collection {
-            if collectionView.frame.size.width != layout.itemSize.width {
-                needsCentering = true
-            } else {
-                collectionView.isPagingEnabled = true
-            }
+            needsCentering = true
             collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
             collectionView.backgroundColor = .clear
             collectionView.delegate = self
@@ -88,6 +84,9 @@ class InfiniteLoopImageView: UIView {
             collectionView.scrollsToTop = false
             collectionView.showsVerticalScrollIndicator = false
             collectionView.showsHorizontalScrollIndicator = false
+            collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+            let delta = (frame.size.width - layout.itemSize.width) / 2
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: delta, bottom: 0, right: delta)
             addSubview(collectionView)
             
             collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +145,13 @@ extension InfiniteLoopImageView: InfiniteLoopImageViewBind {
 
 extension InfiniteLoopImageView: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let del = delegate {
+            let ip = IndexPath(row: viewModel.convertIndex(indexPath.row), section: indexPath.section)
+            del.rotationBanner(self, tappedIndexPath: ip)
+        }
+    }
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         stopAutoRotation()
     }
@@ -167,27 +173,19 @@ extension InfiniteLoopImageView: UICollectionViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if needsCentering {
             let layout = collection!.collectionViewLayout as! UICollectionViewFlowLayout
-            let pageWidth = layout.itemSize.width
-            let currentOffset = scrollView.contentOffset.x
-            var newTargetOffset: CGFloat
+            let pageWidth = layout.itemSize.width + layout.minimumLineSpacing
             let diff = (scrollView.frame.size.width - layout.itemSize.width) / 2
-            
-            let current: CGFloat
-            if targetContentOffset.pointee.x > currentOffset {
-                current = ceil(currentOffset / pageWidth)
+            var directOffset = targetContentOffset.pointee
+            if velocity.x > 0 {
+                directOffset.x += layout.itemSize.width / 2
+            }
+            let next: CGFloat
+            if directOffset.x > scrollView.contentOffset.x {
+                next = ceil(directOffset.x / pageWidth)
             } else {
-                current = floor(currentOffset / pageWidth)
+                next = floor(directOffset.x / pageWidth)
             }
-            newTargetOffset = current * pageWidth - diff
-            
-            if newTargetOffset < 0 {
-                newTargetOffset = 0
-            } else if (newTargetOffset > scrollView.contentSize.width){
-                newTargetOffset = scrollView.contentSize.width
-            }
-            
-            targetContentOffset.pointee.x = CGFloat(currentOffset)
-            scrollView.setContentOffset(CGPoint(x: CGFloat(newTargetOffset), y: scrollView.contentOffset.y), animated: true)
+            targetContentOffset.pointee.x = next * pageWidth - diff
         }
     }
     
@@ -215,12 +213,6 @@ extension InfiniteLoopImageView: UICollectionViewDelegate {
         startAutoRotation()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let dl = delegate {
-            let index = IndexPath(row: viewModel.convertIndex(indexPath.row), section: indexPath.section)
-            dl.rotationBanner(self, tappedIndexPath: index)
-        }
-    }
 }
 
 extension InfiniteLoopImageView: UICollectionViewDataSource {
